@@ -260,7 +260,14 @@ window.NETFLIX_INITIAL_CONTENT = [
                 "title": "Season 2 Episode 15",
                 "overview": "Ross and Rachel finally... you know.",
                 "runtime": "22",
-                "video_url": "https://drive.google.com/file/d/1wGlMdxmTo6GHlb29dexWMoi_lABI0NNA/view", "caption_url": ""
+                "video_url": "https://drive.google.com/file/d/1wGlMdxmTo6GHlb29dexWMoi_lABI0NNA/preview", "caption_url": ""
+            },
+            {
+                "season": 2,
+                "title": "Season 2 Episode 19",
+                "overview": "The One Where Eddie Won't Go",
+                "runtime": "22",
+                "video_url": "https://drive.google.com/file/d/13Y-AVVnaDdI_gQtIqO73f8bQTPWERHfJ/preview", "caption_url": ""
             }
         ]
     }

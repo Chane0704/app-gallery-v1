@@ -569,23 +569,27 @@ const app = {
                 if (window.YT && window.YT.Player) { initPlayer(); } else { window.onYouTubeIframeAPIReady = initPlayer; }
 
             } else {
-                if (videoUrl.includes('drive.google.com') && videoUrl.includes('/view')) {
-                    videoUrl = videoUrl.replace('/view', '/preview');
+                let iframeUrl = videoUrl;
+                // Clean Google Drive URLs
+                if (iframeUrl.includes('drive.google.com')) {
+                    // Strip query parameters (like ?usp=drive_link)
+                    iframeUrl = iframeUrl.split('?')[0];
+                    // Ensure preview mode
+                    if (iframeUrl.includes('/view')) {
+                        iframeUrl = iframeUrl.replace('/view', '/preview');
+                    }
                 }
 
-                playerHtml = `<iframe src="${videoUrl}" width="100%" height="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-                // Ensure preview format
-                const iframeUrl = videoUrl.replace('/view', '/preview');
                 modal.innerHTML = `
                     <div class="video-player-container" style="width: 100%; height: 100%; background: black; position: relative; display: flex; align-items: center; justify-content: center;">
                         <button class="close-player" onclick="app.handlers.closePlayer()" 
                             style="position: absolute; top: 20px; right: 20px; z-index: 200; background: none; border: none; color: white; cursor: pointer;">
                             <i data-lucide="x" width="40" height="40"></i>
                         </button>
-                        ${playerHtml}
+                        <iframe src="${iframeUrl}" width="100%" height="100%" frameborder="0" referrerpolicy="no-referrer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>
                     </div>
                 `;
-                lucide.createIcons();
+                if (window.lucide) window.lucide.createIcons();
             }
         },
 
