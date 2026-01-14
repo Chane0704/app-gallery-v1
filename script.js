@@ -1159,7 +1159,7 @@ const app = {
                 <!-- Left Content -->
                 <div class="hero-content" style="max-width: 600px; padding-bottom: 100px;">
                     <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <span style="color: #E50914; font-weight: 800; font-size: 2.5rem; margin-right: 2px;">N</span>
+                        <span style="color: #E50914; font-weight: 800; font-size: 2.5rem; margin-right: 2px;">S</span>
                         <span style="color: #ddd; font-weight: 500; letter-spacing: 5px; font-size: 0.9rem; margin-top: 5px;">SERIES</span>
                     </div>
                     
