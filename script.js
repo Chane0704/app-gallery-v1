@@ -1754,7 +1754,24 @@ const app = {
                 const index = item.episodes.indexOf(ep);
                 const isCustom = item.is_custom;
                 // Inherited or simple logic for thumbnail
-                let imgUrl = isCustom ? item.backdrop_path : (item.backdrop_path ? app.state.config.backdropBaseUrl + item.backdrop_path : 'https://via.placeholder.com/200');
+                let imgUrl;
+                // 1. Explicit Episode Image
+                if (ep.still_path || ep.img) {
+                    imgUrl = ep.still_path || ep.img;
+                    if (imgUrl.startsWith('/')) imgUrl = (app.state.config.backdropBaseUrl || 'https://image.tmdb.org/t/p/original') + imgUrl;
+                }
+                // 2. Google Drive Auto-Thumbnail (Extract ID)
+                else if (ep.video_url && ep.video_url.includes('drive.google.com')) {
+                    const match = ep.video_url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                    if (match && match[1]) {
+                        imgUrl = `https://lh3.googleusercontent.com/d/${match[1]}=w500`;
+                    }
+                }
+
+                // 3. Fallback to Show Backdrop
+                if (!imgUrl) {
+                    imgUrl = isCustom ? item.backdrop_path : (item.backdrop_path ? app.state.config.backdropBaseUrl + item.backdrop_path : 'https://via.placeholder.com/200');
+                }
                 const epId = 'ep-dur-' + item.id + '-' + index;
 
                 return `
